@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: amit-portfolio-api
+    runtime: node
+    rootDir: server
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/contact/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22.12.0
+      - key: CLIENT_URL
+        sync: false
+      - key: MAIL_USER
+        sync: false
+      - key: MAIL_PASS
+        sync: false
+      - key: CONTACT_TO_EMAIL
+        sync: false
