@@ -4,6 +4,9 @@
   "description": "Backend API for Amit's portfolio - contact form with Nodemailer",
   "main": "index.js",
   "type": "module",
+  "engines": {
+    "node": ">=22.12 <23"
+  },
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
@@ -12,6 +15,7 @@
   "author": "Amit",
   "license": "ISC",
   "dependencies": {
+    "amit-portfolio": "file:..",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",

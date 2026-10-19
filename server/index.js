@@ -7,16 +7,21 @@ import contactRouter from './routes/contact.js'
 
 const app = express()
 const PORT = process.env.PORT || 5000
+// Elastic Beanstalk's load balancer and instance Nginx add two proxy hops.
+app.set('trust proxy', 2)
 
-const ALLOWED_ORIGINS = [
+const ALLOWED_ORIGINS = new Set([
   'http://localhost:5173',
   'http://localhost:4173',
-  process.env.CLIENT_URL,
-].filter(Boolean)
+  ...(process.env.CLIENT_URL || '')
+    .split(',')
+    .map((origin) => origin.trim().replace(/\/+$/, ''))
+    .filter(Boolean),
+])
 
 app.use(cors({
   origin: (origin, cb) => {
-    if (!origin || ALLOWED_ORIGINS.includes(origin)) return cb(null, true)
+    if (!origin || ALLOWED_ORIGINS.has(origin)) return cb(null, true)
     cb(new Error(`CORS: Origin ${origin} not allowed`))
   },
   methods: ['GET', 'POST'],
