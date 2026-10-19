@@ -43,11 +43,10 @@ The API is a Node.js 22 application prepared for AWS Elastic Beanstalk.
 
 1. Import this repository into Vercel.
 2. Set the project **Root Directory** to `client`.
-3. Add `VITE_API_URL` as an environment variable with your API HTTPS origin,
-   for example `https://api.example.com` (no trailing slash). If the API is not
-   ready yet, set it later and redeploy the frontend.
-4. Deploy. Vercel builds into `dist` and routes
-   client-side URLs (such as `/projects`) to the React app.
+3. Deploy. Vercel builds into `dist`, routes client-side URLs (such as
+   `/projects`) to the React app, and proxies `/api/*` requests using the
+   external rewrite in `client/vercel.json`. Leave `VITE_API_URL` unset while
+   using this same-origin proxy.
 
 Copy your Vercel production origin, for example
 `https://your-site.vercel.app`. Use the production domain, not a temporary
@@ -76,7 +75,10 @@ preview deployment URL.
    its HTTPS listener with an ACM certificate for your API domain, and point
    the API DNS name (for example, `api.example.com`) to the environment's load
    balancer. Request the certificate in the same AWS Region as the environment.
-   HTTPS is required when the Vercel site is served over HTTPS. A load balancer
+   The Vercel rewrite must target this HTTPS API domain; do not use the default
+   HTTP Elastic Beanstalk URL for production contact submissions. Update the
+   `destination` for `/api/:path*` in `client/vercel.json` to
+   `https://api.example.com/api/:path*`, then redeploy Vercel. A load balancer
    adds cost; review the estimate before creating the environment.
 5. In **Configuration → Updates, monitoring, and logging → Software →
    Environment properties** (or the environment variables section shown in
@@ -98,9 +100,10 @@ preview deployment URL.
 
 ### 3. Connect and verify deployments
 
-Set Vercel's `VITE_API_URL` to the API HTTPS origin (for example,
-`https://api.example.com`) and redeploy the frontend. Then test direct project
-page loads, project images, resume download, and the contact form.
+Ensure the `/api/:path*` rewrite in `client/vercel.json` targets the API HTTPS
+origin, and leave `VITE_API_URL` unset so the browser calls the same-origin
+Vercel proxy. Redeploy Vercel after changing the rewrite. Then test direct
+project page loads, project images, resume download, and the contact form.
 
 For each API release, create a fresh source bundle from the `server` directory
 and upload it to Elastic Beanstalk. Do not include `.env` files or
