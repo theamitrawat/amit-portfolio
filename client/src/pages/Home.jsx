@@ -8,6 +8,7 @@ import ProjectCard from '../components/ProjectCard'
 import Timeline from '../components/Timeline'
 import ContactForm from '../components/ContactForm'
 import Button from '../components/Button'
+import profilePhoto from '../assets/my-image.png'
 
 import { projects } from '../data/projects'
 import { skills } from '../data/skills'
@@ -85,11 +86,16 @@ export default function Home() {
           />
         </div>
 
-        <div className="relative content-shell-narrow w-full py-4 md:py-1 text-center flex items-center justify-center min-h-[calc(100vh-64px)]">
-          <motion.div variants={stagger} initial="hidden" animate="show" className="mx-auto w-full max-w-5xl flex flex-col items-center text-center">
+        <div className="relative content-shell grid w-full grid-cols-1 items-center gap-10 py-10 md:py-14 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] xl:gap-16">
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            animate="show"
+            className="mx-auto flex w-full max-w-3xl flex-col items-center text-center lg:items-start lg:text-left"
+          >
 
             {/* "Open to Opportunities" badge */}
-            <motion.div variants={fadeUp} className="flex justify-center pt-2 mb-3">
+            <motion.div variants={fadeUp} className="mb-3 flex justify-center pt-2 lg:justify-start">
               <span className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full border border-(--border-hover) tag-pill-accent text-xs font-bold tracking-widest uppercase">
                 <span className="w-2 h-2 rounded-full bg-(--accent-green) animate-pulse" aria-hidden="true" />
                 Open to Opportunities
@@ -110,44 +116,44 @@ export default function Home() {
             </motion.div>
 
             {/* Subtitle */}
-            <motion.p variants={fadeUp} className="text-xl sm:text-2xl font-semibold text-(--text-secondary) mb-3">
+            <motion.p variants={fadeUp} className="mb-3 text-xl font-semibold text-(--text-secondary) sm:text-2xl">
               AI/ML Engineer &nbsp;·&nbsp; Generative AI &amp; RAG
             </motion.p>
 
             {/* Bio */}
-            <motion.p variants={fadeUp} className="text-base sm:text-lg text-(--text-secondary) leading-relaxed max-w-4xl mx-auto mb-5">
+            <motion.p variants={fadeUp} className="mx-auto mb-5 max-w-2xl text-base leading-relaxed text-(--text-secondary) sm:text-lg lg:mx-0">
               I build intelligent, production-grade AI/ML solutions — RAG pipelines,
               predictive models, and data-driven dashboards. Passionate about LLMs,
               Generative AI, and turning raw data into real-world impact.
             </motion.p>
 
             {/* CTAs */}
-            <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-5 mb-5">
+            <motion.div variants={fadeUp} className="mb-5 flex flex-wrap justify-center gap-4 lg:justify-start">
               <Button
                 to="/projects"
                 variant="primary"
-                className="min-w-[188px] px-8 py-3 text-[15px] font-bold"
+                className="min-w-47 px-8 py-3 text-[15px] font-bold"
               >
                 View Projects <FiArrowRight className="w-4 h-4" aria-hidden="true" />
               </Button>
               <Button
                 to="/resume"
                 variant="secondary"
-                className="min-w-[150px] px-6 py-2.5 text-[14px]"
+                className="min-w-37.5 px-6 py-2.5 text-[14px]"
               >
                 <FiDownload className="w-4 h-4" aria-hidden="true" /> Resume
               </Button>
               <Button
                 to="/contact"
                 variant="secondary"
-                className="min-w-[150px] px-6 py-2.5 text-[14px]"
+                className="min-w-37.5 px-6 py-2.5 text-[14px]"
               >
                 <FiMail className="w-4 h-4" aria-hidden="true" /> Contact
               </Button>
             </motion.div>
 
             {/* Social icons */}
-            <motion.div variants={fadeUp} className="flex justify-center gap-3 mb-4">
+            <motion.div variants={fadeUp} className="mb-5 flex justify-center gap-3 lg:justify-start">
               {SOCIAL_LINKS.map(({ href, label, Icon }) => (
                 <a
                   key={label}
@@ -163,7 +169,7 @@ export default function Home() {
             </motion.div>
 
             {/* Stats */}
-            <motion.div variants={fadeUp} className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
+            <motion.div variants={fadeUp} className="mx-auto grid w-full max-w-2xl grid-cols-2 gap-3 lg:mx-0">
               {STATS.map(({ value, label, desc }) => (
                 <div
                   key={label}
@@ -176,6 +182,29 @@ export default function Home() {
               ))}
             </motion.div>
           </motion.div>
+
+          <motion.figure
+            initial={{ opacity: 0, x: 36, scale: 0.96 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 0.75, delay: 0.2, ease: 'easeOut' }}
+            className="relative mx-auto w-full max-w-sm sm:max-w-md lg:mx-0 lg:ml-auto"
+          >
+            <div
+              className="absolute inset-8 rounded-full bg-(--accent-blue) opacity-20 blur-3xl"
+              aria-hidden="true"
+            />
+            <div className="relative overflow-hidden rounded-4xl border border-(--border-hover) bg-transparent shadow-(--shadow-lg)">
+              <img
+                src={profilePhoto}
+                alt="Portrait of Amit Rawat"
+                className="aspect-4/5 w-full object-cover object-[center_30%]"
+                fetchPriority="high"
+              />
+            </div>
+            <figcaption className="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-(--border-hover) bg-(--bg-card) px-5 py-2 text-xs font-semibold text-(--text-primary) shadow-(--shadow)">
+              AI/ML Engineer · MCA Graduate
+            </figcaption>
+          </motion.figure>
         </div>
       </section>
 
@@ -379,7 +408,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} whileHover={{ y: -4 }}
                 transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="group relative flex flex-col items-center gap-3 px-10 py-8 rounded-2xl border border-(--border) bg-(--bg-card) hover:border-(--border-hover) hover:shadow-[0_8px_30px_rgba(56,189,248,0.12)] transition-all duration-250 min-w-[11rem] text-center overflow-hidden"
+                className="group relative flex flex-col items-center gap-3 px-10 py-8 rounded-2xl border border-(--border) bg-(--bg-card) hover:border-(--border-hover) hover:shadow-[0_8px_30px_rgba(56,189,248,0.12)] transition-all duration-250 min-w-44 text-center overflow-hidden"
               >
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
@@ -411,11 +440,23 @@ export default function Home() {
           />
           <div className="grid lg:grid-cols-5 gap-8 items-start">
             {/* form */}
-            <div className="lg:col-span-3 rounded-2xl border border-(--border) bg-(--bg-card) p-6 sm:p-8">
+            <motion.div
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.55 }}
+              className="lg:col-span-3 rounded-2xl border border-(--border) bg-(--bg-card) p-6 sm:p-8"
+            >
               <ContactForm />
-            </div>
+            </motion.div>
             {/* info */}
-            <div className="lg:col-span-2 space-y-4">
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.55, delay: 0.1 }}
+              className="lg:col-span-2 space-y-4"
+            >
               {[
                 { icon: '📧', label: 'Email',    value: 'theamitrwt@gmail.com',   href: 'mailto:theamitrwt@gmail.com'           },
                 { icon: '💼', label: 'LinkedIn', value: 'in/theamitrawat',          href: 'https://linkedin.com/in/theamitrawat' },
@@ -440,7 +481,7 @@ export default function Home() {
                   ⏱ Typical response: <span className="text-(--text-secondary) font-semibold">24–48 hours</span>
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>

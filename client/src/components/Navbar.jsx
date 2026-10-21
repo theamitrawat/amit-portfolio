@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FiMenu, FiX } from 'react-icons/fi'
 import { useScrollY } from '../hooks/useScrollY'
-import profilePhoto from '../assets/logo.jpeg'
+import logoImage from '../assets/logo.png'
 import ThemeToggle from './ThemeToggle'
 
 const NAV_LINKS = [
@@ -87,9 +87,9 @@ export default function Navbar() {
             className="group flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--accent-blue) rounded-lg"
           >
             <img
-              src={profilePhoto}
+              src={logoImage}
               alt=""
-              className="h-8 w-8 rounded-full border border-(--border-hover) object-cover"
+              className="h-10 w-10 object-contain"
             />
             <span className="text-base font-bold text-(--text-primary) tracking-tight">
               Amit
@@ -136,7 +136,7 @@ export default function Navbar() {
             {/* CTA — visible on desktop */}
             <Link
               to="/contact"
-              className="hidden md:inline-flex items-center justify-center gap-1.5 min-w-[150px] whitespace-nowrap px-7 py-3 rounded-full text-sm font-bold tracking-[0.02em] text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(37,99,235,0.32)] active:translate-y-0 active:scale-[0.99]"
+              className="hidden md:inline-flex items-center justify-center gap-1.5 min-w-37.5 whitespace-nowrap px-7 py-3 rounded-full text-sm font-bold tracking-[0.02em] text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(37,99,235,0.32)] active:translate-y-0 active:scale-[0.99]"
               style={{
                 background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(37, 99, 235, 0.95) 42%, rgba(124, 58, 237, 0.92) 100%)',
                 color: '#f8fafc',
@@ -199,7 +199,7 @@ export default function Navbar() {
                 <Link
                   to="/contact"
                   onClick={() => setMenuOpen(false)}
-                  className="flex items-center justify-center w-full min-w-[150px] px-7 py-3 rounded-full text-sm font-bold tracking-[0.02em] text-white min-h-11 transition-all duration-200 hover:-translate-y-0.5"
+                  className="flex items-center justify-center w-full min-w-37.5 px-7 py-3 rounded-full text-sm font-bold tracking-[0.02em] text-white min-h-11 transition-all duration-200 hover:-translate-y-0.5"
                   style={{
                     background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(37, 99, 235, 0.95) 42%, rgba(124, 58, 237, 0.92) 100%)',
                     color: '#f8fafc',

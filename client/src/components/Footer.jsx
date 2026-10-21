@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi'
 import { SiLeetcode } from 'react-icons/si'
-import profilePhoto from '../assets/logo.jpeg'
+import logoImage from '../assets/logo.png'
 
 const NAV_LINKS = [
   { to: '/',        label: 'Home'     },
@@ -40,9 +40,9 @@ export default function Footer() {
           <div className="lg:col-span-2 space-y-4">
             <Link to="/" className="inline-flex items-center gap-2.5 group">
               <img
-                src={profilePhoto}
+                src={logoImage}
                 alt=""
-                className="h-9 w-9 rounded-full border border-(--border-hover) object-cover"
+                className="h-10 w-10 object-contain"
               />
               <span className="text-lg font-bold text-(--text-primary) tracking-tight">
                 Amit<span className="gradient-text"> Rawat</span>
